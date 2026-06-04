@@ -1,0 +1,551 @@
+:root {
+  --primary-cyan: #07E7F7;
+  --primary-dark: #0f172a;
+  --bg-light: #f8fafc;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --shadow-premium: 0 10px 40px rgba(0, 0, 0, 0.05);
+}
+
+.about-us-container {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--text-main);
+  background: var(--bg-light);
+  overflow-x: hidden;
+}
+
+/* Hero Section */
+.about-us-container .about-hero {
+  position: relative;
+  min-height: 70vh; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  background-image: url('/industrial_automation_hero.png'); 
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 160px 20px 80px;
+}
+
+/* Apply the generated image specifically */
+.about-hero {
+  background-image: url('./assets/industrial_automation_hero.png');
+}
+
+.about-us-container .hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.6) 100%);
+  z-index: 1;
+}
+
+.about-us-container .hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  animation: fadeInUp 1s ease-out;
+}
+
+.about-us-container .hero-title {
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 800;
+  margin-bottom: 10px;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  color: white;
+  text-shadow: 0 4px 20px rgba(7, 231, 247, 0.3);
+}
+
+.about-us-container .hero-subtitle {
+  font-size: 1.5rem;
+  color: var(--primary-cyan);
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.intro-text {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+/* Mission & Vision */
+.mission-vision-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 80px auto 100px; /* Consistent positive margin */
+  padding: 0 20px;
+  position: relative;
+  z-index: 3;
+}
+
+.about-us-container .glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: var(--shadow-premium);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(7, 231, 247, 0.1);
+}
+
+.icon-wrapper {
+  width: 70px;
+  height: 70px;
+  background: #f1f5f9;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.mission-card h2, .vision-card h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.mission-card p, .vision-card p {
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+/* Section Common */
+.about-us-container .section-title {
+  font-size: 2.5rem;
+  text-align: center;
+  font-weight: 800;
+  margin-bottom: 50px;
+  color: var(--primary-dark);
+}
+
+/* Core Business */
+.core-business {
+  max-width: 1200px;
+  margin: 0 auto 100px;
+  padding: 0 20px;
+}
+
+.business-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.business-card {
+  background: white;
+  border-radius: 30px;
+  padding: 50px;
+  box-shadow: var(--shadow-premium);
+  border: 1px solid #f1f5f9;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.business-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+.business-card.service {
+  background: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), url('./assets/electrical_service.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.business-image-container {
+  width: 80px;
+  height: 80px;
+  background: var(--primary-cyan);
+  color: var(--primary-dark);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.business-card h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 25px;
+}
+
+.feature-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.feature-list li svg {
+  color: var(--primary-cyan);
+  flex-shrink: 0;
+}
+
+/* Why Choose Us */
+.why-choose-us {
+  background: var(--primary-dark);
+  padding: 100px 20px;
+  color: white;
+}
+
+.why-choose-us .section-title {
+  color: white;
+}
+
+.strengths-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.strength-item {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 40px;
+  border-radius: 24px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.strength-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--primary-cyan);
+}
+
+.strength-icon {
+  color: var(--primary-cyan);
+  margin-bottom: 20px;
+  width: 40px;
+  height: 40px;
+}
+
+.strength-item h4 {
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.strength-item p {
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+/* How We Work */
+.how-we-work {
+  padding: 100px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.process-timeline {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  position: relative;
+  margin-top: 60px;
+}
+
+.process-timeline::before {
+  content: '';
+  position: absolute;
+  top: 40px;
+  left: 50px;
+  right: 50px;
+  height: 2px;
+  background: #e2e8f0;
+  z-index: 0;
+}
+
+.process-step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.step-number {
+  width: 80px;
+  height: 80px;
+  background: white;
+  border: 2px solid var(--primary-cyan);
+  color: var(--primary-dark);
+  font-size: 1.8rem;
+  font-weight: 800;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.process-step:hover .step-number {
+  background: var(--primary-cyan);
+  color: white;
+  transform: scale(1.1);
+}
+
+.process-step h4 {
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.process-step p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+/* Customers Section */
+.customers-section {
+  padding: 100px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.customers-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 40px;
+}
+
+.customer-tag {
+  background: white;
+  padding: 12px 25px;
+  border-radius: 50px;
+  font-weight: 600;
+  color: var(--primary-dark);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.customer-tag:hover {
+  background: var(--primary-cyan);
+  color: var(--primary-dark);
+  transform: translateY(-3px);
+  border-color: var(--primary-cyan);
+}
+
+.customer-note {
+  margin-top: 40px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Values */
+.values-section {
+  background: #f1f5f9;
+  padding: 100px 20px;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.value-card {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: var(--shadow-premium);
+}
+
+.value-card h3 {
+  font-size: 1.2rem;
+  margin: 15px 0 10px;
+  font-weight: 700;
+}
+
+.value-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* Team Section */
+.team-section {
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.team-intro {
+  max-width: 700px;
+  margin: -30px auto 60px;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.team-member-card {
+  background: white;
+  padding: 40px;
+  border-radius: 30px;
+  box-shadow: var(--shadow-premium);
+  transition: all 0.3s ease;
+}
+
+.team-member-card:hover {
+  transform: translateY(-10px);
+}
+
+.member-icon-bg {
+  width: 100px;
+  height: 100px;
+  background: #f1f5f9;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 25px;
+  color: var(--primary-cyan);
+}
+
+/* Reach & Safety */
+.reach-safety {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 50px auto 100px;
+  padding: 0 20px;
+}
+
+.info-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.info-header h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* CTA Section */
+.about-cta {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, #1e293b 100%);
+  padding: 100px 20px;
+  text-align: center;
+  color: white;
+}
+
+.cta-content h2 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  font-weight: 800;
+}
+
+.cta-content p {
+  font-size: 1.25rem;
+  color: #94a3b8;
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 auto;
+  padding: 18px 45px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background: var(--primary-cyan);
+  color: var(--primary-dark);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(7, 231, 247, 0.4);
+}
+
+.cta-btn:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 15px 40px rgba(7, 231, 247, 0.6);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .mission-grid, .business-grid, .team-grid {
+    grid-template-columns: 1fr;
+  }
+  .values-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .mission-vision-section {
+    grid-template-columns: 1fr;
+    margin-top: -50px;
+  }
+  .process-timeline {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .process-timeline::before {
+    display: none;
+  }
+  .reach-safety {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .values-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

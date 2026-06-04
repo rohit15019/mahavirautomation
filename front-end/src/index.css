@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@400;600;800&display=swap');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #ffffff;
+  color: #000000;
+  overflow-x: hidden;
+  width: 100%;
+  -webkit-text-size-adjust: 100%; /* Prevent iOS text zoom */
+  scroll-behavior: smooth;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button, a, select, [role="button"] {
+  touch-action: manipulation; /* Faster tap response on mobile */
+}
+
+/* Global Mobile Responsive Fixes */
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make all tables scrollable horizontally on mobile */
+.table-responsive,
+.table-container,
+.table-card {
+  overflow-x: auto;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+table {
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  /* Ensure padding is touch-friendly */
+  input, button, select, textarea {
+    font-size: 16px !important; /* Prevents iOS Safari zoom */
+  }
+
+  .btn, button {
+    min-height: 44px; /* Touch target size */
+  }
+
+  /* Fluid typography for small screens */
+  h1 { font-size: clamp(2rem, 8vw, 3.5rem) !important; }
+  h2 { font-size: clamp(1.5rem, 6vw, 2.5rem) !important; }
+}

@@ -1,0 +1,241 @@
+.contact-page {
+  font-family: 'Inter', sans-serif;
+  color: #333;
+  padding: 60px 5% 100px;
+  background-color: #fafbfc;
+}
+
+.contact-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 60px;
+}
+
+.contact-header h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 20px;
+}
+
+.contact-header p {
+  font-size: 1.1rem;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.contact-container {
+  display: flex;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Left Side */
+.contact-info-section {
+  flex: 1;
+}
+
+.contact-info-section h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #111827;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 12px;
+}
+
+.info-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.info-icon {
+  width: 40px;
+  height: 40px;
+  background-color: #f0fbff;
+  color: #0bc5ea;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.info-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-label {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.info-value {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.enterprise-card {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.enterprise-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.enterprise-card p {
+  color: #64748b;
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.enterprise-card a {
+  color: #0bc5ea;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.enterprise-card a:hover {
+  text-decoration: underline;
+}
+
+/* Right Side */
+.contact-form-section {
+  flex: 1.5;
+}
+
+.form-box {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f1f5f9;
+}
+
+.form-box h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #111827;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 12px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  color: #111827;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background-color: #ffffff;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #0bc5ea;
+  box-shadow: 0 0 0 3px rgba(11, 197, 234, 0.1);
+}
+
+.form-group select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+}
+
+.message-group {
+  margin-top: 10px;
+}
+
+.btn-submit {
+  background-color: #0bc5ea;
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-submit:hover {
+  background-color: #0aa3c2;
+  transform: translateY(-2px);
+}
+
+.btn-submit:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.form-status {
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.form-status.success {
+  background-color: #f0fdf4;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.form-status.error {
+  background-color: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+@media (max-width: 900px) {
+  .contact-container {
+    flex-direction: column;
+  }
+}
