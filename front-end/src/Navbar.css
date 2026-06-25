@@ -427,11 +427,12 @@
     display: none; /* Hide mega menu by default on mobile */
   }
 
-  /* On hover/active, show mega menu in mobile as an accordion */
-  .nav-item-with-dropdown:hover .mega-menu-container,
-  .nav-item-with-dropdown:active .mega-menu-container {
-    display: flex;
+  /* Show mega menu in mobile as an accordion only when tapped (.show-mobile) */
+  .nav-item-with-dropdown.show-mobile .mega-menu-container {
+    display: flex !important;
     flex-direction: column;
+    opacity: 1;
+    visibility: visible;
   }
 
   .mega-menu-side {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import * as Icons from 'lucide-react';
-import logo from './assets/logo.png';
+import logo from './assets/mahavir_logo.png';
 import './AdminLayout.css';
 
 const AdminLayout = () => {

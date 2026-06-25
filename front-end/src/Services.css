@@ -365,46 +365,84 @@
 /* Consultation Section */
 .consultation-section {
   text-align: center;
-  padding: 100px 20px;
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
+  padding: 80px 40px;
+  width: calc(100% - 40px);
+  max-width: 1000px;
+  margin: 80px auto;
+  background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+  border-radius: 30px;
+  color: white;
+  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.consultation-section::before {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: -100px;
+  left: -100px;
+  background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.consultation-section::after {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  bottom: -150px;
+  right: -100px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%;
+  z-index: 0;
 }
 
 .consultation-section h2 {
-  font-size: 2.2rem;
+  font-size: 2.8rem;
   font-weight: 800;
-  color: #111827;
-  margin-bottom: 20px;
+  color: #ffffff;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .consultation-section p {
-  font-size: 1.1rem;
-  color: #4b5563;
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 40px;
   line-height: 1.6;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .book-consultation-btn {
-  background-color: #07E7F7;
-  color: #111827;
+  background-color: #ffffff;
+  color: #2563eb;
   border: none;
   border-radius: 50px;
-  padding: 16px 40px;
-  font-size: 1.1rem;
-  font-weight: 700;
+  padding: 18px 48px;
+  font-size: 1.15rem;
+  font-weight: 800;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 20px rgba(7, 231, 247, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
 }
 
 .book-consultation-btn:hover {
-  background-color: #05c2d1;
-  transform: translateY(-3px);
-  box-shadow: 0 15px 25px rgba(7, 231, 247, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+  background-color: #f8fafc;
+  color: #1d4ed8;
 }
 
 /* Footer Section */

@@ -42,7 +42,7 @@ const AdminRequests = () => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
-        body: JSON.stringify(newStatus)
+        body: JSON.stringify({ status: newStatus })
       });
 
       if (response.ok) {

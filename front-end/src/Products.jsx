@@ -123,6 +123,13 @@ const Products = () => {
           </div>
         )}
       </div>
+
+      {/* Consultation Section */}
+      <div className="consultation-section">
+        <h2>Not sure which product you need?</h2>
+        <p>Schedule a free consultation with our automation experts. We'll analyze your needs and recommend the best approach.</p>
+        <button className="book-consultation-btn" onClick={() => navigate('/contact')}>Book a consultation</button>
+      </div>
     </div>
   );
 };

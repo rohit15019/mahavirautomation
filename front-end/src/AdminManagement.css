@@ -541,17 +541,17 @@
 .action-buttons .delete-btn:hover { background: var(--admin-danger); color: white; }
 
 @media (max-width: 1400px) {
-  .management-grid {
+  .admin-management-container .management-grid {
     grid-template-columns: 400px 1fr; /* Narrower form on medium screens */
   }
 }
 
 @media (max-width: 1200px) {
 
-  .management-grid {
+  .admin-management-container .management-grid {
     grid-template-columns: 1fr;
   }
-  .management-card {
+  .admin-management-container .management-card {
     position: static;
   }
 }
@@ -736,5 +736,102 @@
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+/* Mobile Responsiveness Fixes */
+@media (max-width: 768px) {
+  .admin-management-container {
+    padding: 1rem;
+    margin-top: 0;
+    border-radius: 12px;
+  }
+  
+  .admin-management-container .management-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .admin-management-container .management-header h1 {
+    font-size: 1.6rem;
+  }
+  
+  .search-box {
+    width: 100%;
+  }
+
+  .list-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .admin-management-container .management-form-card,
+  .admin-management-container .management-card,
+  .management-list-card {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+  
+  .item-card {
+    padding: 1rem;
+  }
+  
+  .management-feature-item {
+    padding: 12px;
+  }
+  
+  .item-header {
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .item-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .item-actions {
+    flex-wrap: nowrap;
+    gap: 0.4rem;
+  }
+
+  .icon-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .icon-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .item-content h3 {
+    font-size: 1.1rem;
+  }
+
+  /* Fix for category table on mobile */
+  .management-list-card {
+    padding: 0; /* Remove padding so table flush with borders for cleaner scroll */
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .admin-table {
+    min-width: 650px; /* Force table to stay wide so it triggers horizontal scroll instead of squishing text */
+  }
+
+  .category-name-cell {
+    min-width: 250px; /* Ensure category names have plenty of room */
+  }
+  
+  .parent-col {
+    min-width: 120px;
+  }
+
+  .admin-table th, .admin-table td {
+    padding: 1rem 0.75rem; /* Better padding for touch targets */
+    font-size: 0.85rem;
+  }
 }
 

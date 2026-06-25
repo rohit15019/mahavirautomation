@@ -1,30 +1,45 @@
-const nodemailer = require('nodemailer');
+const { google } = require('googleapis');
 
 const sendEmail = async (options) => {
   try {
-    // Create a transporter
-    const transporter = nodemailer.createTransport({
-      service: 'gmail', // You can use other services or SMTP host details
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+    const oAuth2Client = new google.auth.OAuth2(
+      process.env.GOOGLE_CLIENT_ID,
+      process.env.GOOGLE_CLIENT_SECRET,
+      "https://developers.google.com/oauthplayground"
+    );
+
+    oAuth2Client.setCredentials({ refresh_token: process.env.GOOGLE_REFRESH_TOKEN });
+
+    const gmail = google.gmail({ version: 'v1', auth: oAuth2Client });
+
+    const utf8Subject = `=?utf-8?B?${Buffer.from(options.subject).toString('base64')}?=`;
+    const messageParts = [
+      `From: Mahavir Automation <${process.env.EMAIL_USER}>`,
+      `To: ${options.email}`,
+      'Content-Type: text/html; charset=utf-8',
+      'MIME-Version: 1.0',
+      `Subject: ${utf8Subject}`,
+      '',
+      options.html || options.message,
+    ];
+    const message = messageParts.join('\n');
+
+    // The body needs to be base64url encoded
+    const encodedMessage = Buffer.from(message)
+      .toString('base64')
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_')
+      .replace(/=+$/, '');
+
+    await gmail.users.messages.send({
+      userId: 'me',
+      requestBody: {
+        raw: encodedMessage,
       },
     });
-
-    // Define the email options
-    const mailOptions = {
-      from: `Mahavir Automation <${process.env.EMAIL_USER}>`,
-      to: options.email,
-      subject: options.subject,
-      text: options.message,
-      html: options.html, // Optional HTML content
-    };
-
-    // Actually send the email
-    await transporter.sendMail(mailOptions);
   } catch (error) {
-    console.error('Email sending failed:', error.message);
-    throw error; // Let the caller handle the error
+    console.error('Email sending failed via Gmail API:', error.message);
+    throw error;
   }
 };
 

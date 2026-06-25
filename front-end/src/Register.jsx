@@ -47,6 +47,8 @@ const Register = () => {
     setServerError('');
   };
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
@@ -55,6 +57,10 @@ const Register = () => {
       setErrors(validationErrors);
       return;
     }
+
+    setIsLoading(true);
+    setServerError('');
+    setSuccessMessage('');
 
     try {
       const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/v1.0/auth/register`, {
@@ -65,7 +71,12 @@ const Register = () => {
         body: JSON.stringify(formData)
       });
 
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch (err) {
+        throw new Error('Server returned an invalid response.');
+      }
 
       if (!response.ok) {
         if (data.errors) {
@@ -85,7 +96,9 @@ const Register = () => {
         }, 4000);
       }
     } catch (error) {
-      setServerError('Unable to connect to the server. Is the backend running?');
+      setServerError(error.message || 'Unable to connect to the server. Is the backend running?');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -207,7 +220,9 @@ const Register = () => {
             {errors.confirmPassword && <span className="error-text">{errors.confirmPassword}</span>}
           </div>
 
-          <button type="submit" className="auth-submit-btn">Create Account</button>
+          <button type="submit" className="auth-submit-btn" disabled={isLoading}>
+            {isLoading ? 'Creating Account...' : 'Create Account'}
+          </button>
         </form>
 
         <div className="auth-footer">

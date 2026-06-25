@@ -10,7 +10,7 @@ import {
   Menu,
   X
 } from 'lucide-react';
-import logo from './assets/logo.png';
+import logo from './assets/mahavir_logo.png';
 
 import './Navbar.css';
 
@@ -27,6 +27,7 @@ const Navbar = () => {
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mobileOpenDropdown, setMobileOpenDropdown] = useState(null);
 
   // Close mobile menu when location changes
   useEffect(() => {
@@ -87,7 +88,10 @@ const Navbar = () => {
     
     // Check if current activeCategory belongs to this type
     const isActiveType = typeCategories.some(c => (c.id || c.Id) === activeCategory);
-    const currentActive = isActiveType ? activeCategory : (rootCategories.length > 0 ? (rootCategories[0].id || rootCategories[0].Id) : null);
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 968;
+    const currentActive = isActiveType 
+      ? activeCategory 
+      : (isMobile ? null : (rootCategories.length > 0 ? (rootCategories[0].id || rootCategories[0].Id) : null));
     
     const subCategories = currentActive 
       ? typeCategories.filter(c => (c.parentId === currentActive || c.ParentId === currentActive))
@@ -100,25 +104,49 @@ const Navbar = () => {
         {/* Left Pane: Root Categories (Scrollable) */}
         <div className="mega-menu-side root-pane">
           <ul className="root-list">
-            {rootCategories.map(cat => (
-              <li 
-                key={cat.id || cat.Id} 
-                onMouseEnter={() => setActiveCategory(cat.id || cat.Id)}
-                className={`root-item ${currentActive === (cat.id || cat.Id) ? 'active' : ''}`}
-              >
-
-                <Link to={`${linkPrefix}?category=${cat.id || cat.Id}`}>
-                  {cat.name || cat.Name}
-                  {typeCategories.some(c => (c.parentId === (cat.id || cat.Id) || c.ParentId === (cat.id || cat.Id))) && <ChevronRight size={14} className="menu-arrow-icon" />}
-
-                </Link>
-              </li>
-            ))}
+            {rootCategories.map(cat => {
+              const hasSub = typeCategories.some(c => (c.parentId === (cat.id || cat.Id) || c.ParentId === (cat.id || cat.Id)));
+              return (
+                <li 
+                  key={cat.id || cat.Id} 
+                  onMouseEnter={() => { if (!isMobile) setActiveCategory(cat.id || cat.Id) }}
+                  className={`root-item ${currentActive === (cat.id || cat.Id) ? 'active' : ''}`}
+                >
+                  <Link 
+                    to={`${linkPrefix}?category=${cat.id || cat.Id}`}
+                    onClick={(e) => {
+                      if (isMobile && hasSub) {
+                        if (currentActive !== (cat.id || cat.Id)) {
+                          e.preventDefault();
+                          setActiveCategory(cat.id || cat.Id);
+                        }
+                      }
+                    }}
+                  >
+                    {cat.name || cat.Name}
+                    {hasSub && <ChevronRight size={14} className="menu-arrow-icon" style={{ transform: isMobile && currentActive === (cat.id || cat.Id) ? 'rotate(90deg)' : 'none', transition: 'transform 0.2s' }} />}
+                  </Link>
+                  
+                  {/* On Mobile, render sub-categories directly under the parent for accordion effect */}
+                  {isMobile && currentActive === (cat.id || cat.Id) && subCategories.length > 0 && (
+                    <ul className="mobile-sub-list" style={{ listStyle: 'none', paddingLeft: '20px', margin: '5px 0' }}>
+                      {subCategories.map(sub => (
+                        <li key={sub.id || sub.Id} style={{ padding: '8px 0', borderTop: '1px solid #e2e8f0' }}>
+                          <Link to={`${linkPrefix}?category=${sub.id || sub.Id}`} style={{ color: '#64748b', fontSize: '0.85rem', textDecoration: 'none', display: 'block' }}>
+                            {sub.name || sub.Name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </div>
 
-        {/* Right Pane: Sub-categories (Scrollable) */}
-        {subCategories.length > 0 && (
+        {/* Right Pane: Sub-categories (Desktop Only) */}
+        {!isMobile && subCategories.length > 0 && (
           <div className="mega-menu-side sub-pane">
             <ul className="sub-list">
               {subCategories.map(sub => (
@@ -154,18 +182,36 @@ const Navbar = () => {
         <div className={`nav-links ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
           <Link to="/" className={path === '/' ? 'active' : ''}>Home</Link>
           
-          <div className="nav-item-with-dropdown">
-            <Link to="/products" className={path.startsWith('/products') ? 'active' : ''}>
-              Products {categories.some(c => (c.categoryType || c.CategoryType) === 'Product') && <ChevronDown size={14} />}
+          <div className={`nav-item-with-dropdown ${mobileOpenDropdown === 'Product' ? 'show-mobile' : ''}`}>
+            <Link 
+              to="/products" 
+              className={path.startsWith('/products') ? 'active' : ''}
+              onClick={(e) => {
+                if (window.innerWidth <= 968) {
+                  e.preventDefault();
+                  setMobileOpenDropdown(mobileOpenDropdown === 'Product' ? null : 'Product');
+                }
+              }}
+            >
+              Products {categories.some(c => (c.categoryType || c.CategoryType) === 'Product') && <ChevronDown size={14} className={mobileOpenDropdown === 'Product' ? 'rotate' : ''} />}
             </Link>
             {renderDropdown('Product', '/products')}
           </div>
 
           <Link to="/about" className={path === '/about' ? 'active' : ''}>About us</Link>
           
-          <div className="nav-item-with-dropdown">
-            <Link to="/services" className={path.startsWith('/services') ? 'active' : ''}>
-              Services {categories.some(c => (c.categoryType || c.CategoryType) === 'Service') && <ChevronDown size={14} />}
+          <div className={`nav-item-with-dropdown ${mobileOpenDropdown === 'Service' ? 'show-mobile' : ''}`}>
+            <Link 
+              to="/services" 
+              className={path.startsWith('/services') ? 'active' : ''}
+              onClick={(e) => {
+                if (window.innerWidth <= 968) {
+                  e.preventDefault();
+                  setMobileOpenDropdown(mobileOpenDropdown === 'Service' ? null : 'Service');
+                }
+              }}
+            >
+              Services {categories.some(c => (c.categoryType || c.CategoryType) === 'Service') && <ChevronDown size={14} className={mobileOpenDropdown === 'Service' ? 'rotate' : ''} />}
             </Link>
             {renderDropdown('Service', '/services')}
           </div>

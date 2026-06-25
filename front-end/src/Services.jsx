@@ -5,7 +5,7 @@ import {
   Shield, Zap, Server, Cloud, Smartphone, Cpu, Activity, Globe 
 } from 'lucide-react';
 import { getServices } from './servicesData';
-import headerImg from './assets/service_hero.png';
+import headerImg from './assets/service_header.png';
 import './Services.css';
 
 const IconsMap = {

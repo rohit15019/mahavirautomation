@@ -60,18 +60,54 @@ router.post('/register', async (req, res) => {
     await user.save();
 
     // Send verification email
-    const verificationLink = `http://localhost:5173/verify-email?token=${verificationToken}`;
-    const message = `Dear ${firstName},\n\nPlease verify your email by clicking on the following link:\n\n${verificationLink}\n\nIf you did not request this, please ignore this email.`;
+    const clientUrl = process.env.CLIENT_URL || req.headers.origin || 'http://localhost:5173';
+    const verificationLink = `${clientUrl}/verify-email?token=${verificationToken}`;
+    
+    const htmlMessage = `
+      <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+        <div style="background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%); padding: 30px 20px; text-align: center;">
+          <h1 style="color: #ffffff; margin: 0; font-size: 28px; letter-spacing: 1px;">Mahavir Automation</h1>
+        </div>
+        <div style="padding: 40px 30px; background-color: #ffffff;">
+          <h2 style="margin-top: 0; color: #1e293b; font-size: 22px;">Verify Your Email Address</h2>
+          <p style="font-size: 16px; line-height: 1.6; color: #475569;">
+            Dear <strong>${firstName}</strong>,<br><br>
+            Thank you for registering with Mahavir Automation. To complete your registration and secure your account, please verify your email address by clicking the button below.
+          </p>
+          <div style="text-align: center; margin: 40px 0;">
+            <a href="${verificationLink}" style="background-color: #2563eb; color: #ffffff; padding: 14px 32px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; display: inline-block; box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);">Verify Email</a>
+          </div>
+          <p style="font-size: 14px; line-height: 1.6; color: #64748b; margin-bottom: 0;">
+            Or copy and paste this link into your browser:<br>
+            <a href="${verificationLink}" style="color: #0ea5e9; word-break: break-all;">${verificationLink}</a>
+          </p>
+          <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 30px 0;" />
+          <p style="font-size: 13px; line-height: 1.5; color: #94a3b8; margin: 0;">
+            If you did not create an account using this email address, please ignore this email. Your account will not be activated.
+          </p>
+        </div>
+        <div style="background-color: #f8fafc; padding: 20px; text-align: center; border-top: 1px solid #e2e8f0;">
+          <p style="font-size: 13px; color: #64748b; margin: 0;">&copy; ${new Date().getFullYear()} Mahavir Automation. All rights reserved.</p>
+        </div>
+      </div>
+    `;
     
     try {
       await sendEmail({
         email: user.email,
-        subject: 'Verify Your Email Address',
-        message: message,
+        subject: 'Verify Your Email Address - Mahavir Automation',
+        html: htmlMessage,
       });
     } catch (emailError) {
       console.error('Error sending verification email:', emailError);
-      // Let it pass, user is saved anyway
+      
+      // Delete the user we just created so they can try registering again
+      await User.findByIdAndDelete(user._id);
+      
+      return res.status(500).json({ 
+        message: 'Failed to send verification email: ' + emailError.message,
+        errorDetail: emailError.message 
+      });
     }
 
     res.status(201).json({
@@ -102,6 +138,11 @@ router.post('/login', async (req, res) => {
 
     if (!user) {
       return res.status(400).json({ message: 'Invalid credentials. User does not exist.' });
+    }
+
+    // Check if user is verified
+    if (user.isVerified === false) {
+      return res.status(403).json({ message: 'Please verify your email address before logging in. Check your inbox for the verification link.' });
     }
 
     // Check password

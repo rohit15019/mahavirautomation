@@ -52,9 +52,12 @@ const PublicLayout = () => (
   </>
 );
 
+import ScrollToTop from './ScrollToTop';
+
 const App = () => {
   return (
     <Router>
+      <ScrollToTop />
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
           {/* Public Routes */}
