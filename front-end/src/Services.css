@@ -298,11 +298,12 @@
   color: #4b5563;
   line-height: 1.6;
   margin-bottom: 16px;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
   width: 100%;
-  white-space: pre-wrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .service-features-list {
@@ -315,20 +316,22 @@
 
 .service-features-list li {
   display: flex;
-  align-items: flex-start;
+  align-items: center; /* better alignment for single line */
   margin-bottom: 12px;
   font-size: 0.95rem;
   color: #6b7280;
   line-height: 1.5;
-  overflow: hidden; /* Needed for child text-overflow */
+  overflow: hidden; 
+  width: 100%; /* Ensure li takes full width */
 }
 
 .service-features-list .feature-text {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: inline-block;
-  max-width: 100%;
+  display: block;
+  flex: 1;
+  min-width: 0;
 }
 
 .feature-diamond {
