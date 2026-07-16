@@ -93,12 +93,12 @@ const Products = () => {
               <p className="product-description">{product.description}</p>
               
               <ul className="product-features">
-                {product.features.map((feature, index) => (
+                {product.features.slice(0, 1).map((feature, index) => (
                   <li key={index}>
                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M20 6L9 17L4 12" stroke="#00b4d8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
-                    {feature}
+                    <span className="feature-text">{feature}</span>
                   </li>
                 ))}
               </ul>

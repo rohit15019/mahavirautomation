@@ -96,10 +96,10 @@ const Services = () => {
               <h3 className="service-card-title">{service.title}</h3>
               <p className="service-card-desc">{service.description}</p>
               <ul className="service-features-list">
-                {service.features.map((feature, index) => (
+                {service.features.slice(0, 1).map((feature, index) => (
                   <li key={index}>
                     <span className="feature-diamond">✦</span>
-                    {feature}
+                    <span className="feature-text">{feature}</span>
                   </li>
                 ))}
               </ul>

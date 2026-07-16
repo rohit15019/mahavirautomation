@@ -320,9 +320,15 @@
   font-size: 0.95rem;
   color: #6b7280;
   line-height: 1.5;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
+  overflow: hidden; /* Needed for child text-overflow */
+}
+
+.service-features-list .feature-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  max-width: 100%;
 }
 
 .feature-diamond {

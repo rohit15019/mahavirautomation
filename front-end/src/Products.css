@@ -252,7 +252,7 @@
   padding: 0;
   margin: 0 0 32px 0;
   flex-grow: 1;
-  min-height: 165px;
+  min-height: 40px; /* Reduced min-height since only 1 feature is shown */
 }
 
 .product-features li {
@@ -262,9 +262,15 @@
   align-items: flex-start;
   margin-bottom: 12px;
   line-height: 1.5;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  word-break: break-word;
+  overflow: hidden; /* Needed for child text-overflow */
+}
+
+.product-features .feature-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  max-width: 100%;
 }
 
 .product-features li svg {
