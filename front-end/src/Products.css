@@ -300,23 +300,6 @@
   margin-left: 4px;
 }
 
-.get-started-btn {
-  width: 100%;
-  padding: 10px;
-  background-color: #06b6d4;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.get-started-btn:hover {
-  background-color: #0891b2;
-}
-
 /* Responsive adjustments */
 @media (max-width: 1024px) {
   .products-grid {

@@ -84,7 +84,12 @@ const Products = () => {
       <div className="products-container">
         <div className="products-grid">
         {filteredProducts.map((product) => (
-          <div key={product.id} className="product-card">
+          <div 
+            key={product.id} 
+            className="product-card"
+            onClick={() => navigate(`/product/${product.id}`)}
+            style={{ cursor: 'pointer' }}
+          >
             <div className="product-image-container">
               <img src={getImageUrl(product.imageKey)} alt={product.title} className="product-image" />
             </div>
@@ -106,13 +111,6 @@ const Products = () => {
               <div className="product-pricing">
                 <span className="price-amount">₹{product.price}</span>
               </div>
-              
-              <button 
-                className="get-started-btn"
-                onClick={() => navigate(`/product/${product.id}`)}
-              >
-                Get started
-              </button>
             </div>
           </div>
         ))}
