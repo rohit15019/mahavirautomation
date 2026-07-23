@@ -22,6 +22,7 @@ const getImageUrl = (imageKey) => {
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const [categoryName, setCategoryName] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
@@ -56,6 +57,11 @@ const Products = () => {
     loadData();
   }, [location.search]);
 
+  const displayedProducts = filteredProducts.filter(product => 
+    product.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    (product.description && product.description.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
+
   return (
     <div className="products-page">
       <div className="products-header">
@@ -82,8 +88,28 @@ const Products = () => {
       </div>
 
       <div className="products-container">
+        <div className="products-search-bar" style={{ marginBottom: '30px', maxWidth: '600px', margin: '0 auto 30px auto' }}>
+          <input 
+            type="text" 
+            placeholder="Search products by name or description..." 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{ 
+              width: '100%', 
+              padding: '14px 20px', 
+              borderRadius: '30px', 
+              border: '1px solid #e2e8f0', 
+              fontSize: '1rem', 
+              outline: 'none',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)',
+              transition: 'all 0.3s ease'
+            }}
+            onFocus={(e) => { e.target.style.borderColor = '#06b6d4'; e.target.style.boxShadow = '0 0 0 3px rgba(6, 182, 212, 0.2)'; }}
+            onBlur={(e) => { e.target.style.borderColor = '#e2e8f0'; e.target.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.05)'; }}
+          />
+        </div>
         <div className="products-grid">
-        {filteredProducts.map((product) => (
+        {displayedProducts.map((product) => (
           <div 
             key={product.id || product.Id} 
             className="product-card"
